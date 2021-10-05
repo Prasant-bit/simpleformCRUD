@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -38,15 +39,15 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
 
         //validation
 
-        $this->validate($request, [
-            'title' => 'required | min:3',
-            'content' => 'required | max:100'
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required | min:3',
+        //     'content' => 'required | max:100'
+        // ]);
         //
         //to show all the data at once
         // return $request->all();
