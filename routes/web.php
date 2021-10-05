@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +32,17 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::resource('/posts', PostsController::class);
+});
+
+//date and time with DateTime and Carbon
+Route::get('/dates', function () {
+    // $date = new DateTime();
+    // echo $date->format('d-m-Y');
+
+    // echo '<br';
+
+    $current = Carbon::now();
+
+    // $current = Carbon::now()->diffForHumans();
+    echo $current;
 });
