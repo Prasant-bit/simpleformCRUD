@@ -6,7 +6,7 @@
 
     {{-- <form method="POST" action="/posts"> --}}
         {!! Form::open(['url'=> '/posts',
-        'method'=>'POST']) !!}
+        'method'=>'POST', 'files'=>true]) !!}
         @csrf
         {{-- <input type="text" name="title" placeholder="Enter title here"> --}}
 
@@ -24,6 +24,9 @@
             {!! Form::textarea('content') !!}
         </div>
         <br>
+
+        {!! Form::file('file', ['class'=>'form-control']) !!}
+        
         {{-- <button type="submit">Submit</button> --}}
         {!! Form::submit('Submit') !!}
 

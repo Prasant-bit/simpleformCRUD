@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,17 @@ Route::get('/dates', function () {
 
     // $current = Carbon::now()->diffForHumans();
     echo $current;
+});
+
+//Accessors
+Route::get('/getname', function () {
+    $user = User::findOrFail(1);
+    return $user->name;
+});
+
+//mutators
+Route::get('/setname/{id}', function ($id) {
+    $user = User::findOrFail($id);
+    $user->name = "yankee";
+    $user->save();
 });

@@ -18,7 +18,7 @@ class PostsController extends Controller
     public function index()
     {
         //reading the data
-        $posts = Post::all();
+        $posts = Post::latest()->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -41,6 +41,34 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
+
+        //Persisting file data into database
+
+        $input = $request->all();
+
+        if ($file = $request->file('file')) {
+            $name = $file->getClientOriginalName();
+
+            $file->move('images', $name);
+
+            $input['path'] = $name;
+        }
+
+        Post::create($input);
+
+        //Retrieving file data
+        // $file = $request->file('file');
+
+        // echo '<br>';
+
+        // echo $file->getClientOriginalName();
+
+        // echo '<br>';
+
+        // echo $file->getPath();
+        // echo '<br>';
+
+        // echo $file->getSize();
 
         //validation
 
@@ -69,10 +97,14 @@ class PostsController extends Controller
 
         //or
 
-        $input = $request->all();
-        $input['title'] = $request->title;
-        $input['content'] = $request->content;
-        Post::create($request->all());
+        // $input = $request->all();
+        // $input['title'] = $request->title;
+        // $input['content'] = $request->content;
+        // Post::create($request->all());
+
+        // return redirect('/posts');
+
+
     }
 
     /**
@@ -110,7 +142,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreatePostRequest $request, $id)
     {
 
 

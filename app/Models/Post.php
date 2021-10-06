@@ -12,11 +12,17 @@ class Post extends Model
     protected $fillable = [
 
         'title',
-        'content'
+        'content',
+        'path'
     ];
 
     public function posts()
     {
         return $this->hasMany('App\Models\Post');
+    }
+
+    public static function scopeLatest($query)
+    {
+        return $query->orderBy('id', 'asc')->get();
     }
 }

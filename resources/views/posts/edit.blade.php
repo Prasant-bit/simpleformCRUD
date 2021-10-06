@@ -22,5 +22,12 @@
  {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
  {!! Form::close() !!}
 
+ @if (count($errors)>0)
+  <div style="color: red">
+     @foreach ($errors->all() as $error)
+         <li>{{$error}}</li>
+     @endforeach
+    </div>
+ @endif
  
 @endsection
